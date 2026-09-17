@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Liquidez — quanto tempo para vender seu imóvel no litoral?</title>
+<meta name="description" content="Estimador de tempo de venda por cidade, tipo e preço do imóvel no litoral paulista. Satélite da rede praia.digital">
+<style>
+body{margin:0;font-family:system-ui,sans-serif;background:#ecfeff;color:#164e63;min-height:100vh}
+header{padding:24px;text-align:center;background:linear-gradient(120deg,#0e7490,#06b6d4);color:#fff}
+nav a{color:#cffafe;margin:0 8px;text-decoration:none;font-size:14px;font-weight:600}
+.wrap{max-width:700px;margin:auto;padding:24px}
+.panel{background:#fff;border-radius:16px;padding:22px;margin-bottom:16px;box-shadow:0 6px 18px rgba(14,116,144,.1)}
+label{display:block;margin:10px 0 4px;font-weight:600}
+input,select{width:100%;padding:12px;border-radius:10px;border:2px solid #a5f3fc;font-size:16px}
+.res{text-align:center;padding:20px}
+.res b{font-size:46px;color:#0891b2;display:block}
+.vel{display:flex;justify-content:center;gap:6px;margin:10px 0;font-size:28px}
+footer{padding:20px;text-align:center;font-size:13px}
+footer a{color:#0e7490}
+</style></head>
+<body>
+<header><h1>⏱️ Liquidez</h1><p>Imóvel é patrimônio, mas quanto tempo leva para virar dinheiro?</p>
+<nav><a href="https://praia.digital">Praia Digital</a><a href="https://praia.digital/radar-precos">Radar de Preços</a><a href="https://praia.digital/alerta-ofertas">Alerta de Ofertas</a><a href="https://praia.digital/apps">Todos os apps</a></nav></header>
+<div class="wrap"><div class="panel">
+<label>🏙️ Cidade</label><select id="cid" onchange="calc()"><option value="0.7">Santos (mercado rápido)</option><option value="0.8">Guarujá</option><option value="0.9">Praia Grande</option><option value="1.2">São Sebastião</option><option value="1.3">Caraguatatuba</option><option value="1.5">Ubatuba (mercado lento)</option></select>
+<label>🏠 Tipo</label><select id="tipo" onchange="calc()"><option value="0.8">Apartamento até R$ 400 mil</option><option value="1" selected>Apartamento R$ 400–900 mil</option><option value="1.3">Apartamento acima de R$ 900 mil</option><option value="1.4">Casa em condomínio</option><option value="1.7">Casa de alto padrão</option></select>
+<label>🏷️ Seu preço vs mercado</label><select id="preco" onchange="calc()"><option value="0.6">10% abaixo do mercado (quero vender rápido)</option><option value="1" selected>Preço de mercado</option><option value="1.8">10% acima (otimista)</option></select>
+<div class="res"><p>Tempo estimado de venda</p><b id="tempo">—</b><div class="vel" id="vel"></div><p id="dica" style="font-size:14px"></p></div></div>
+</div>
+<footer>Rede <a href="https://praia.digital">praia.digital</a> · <a href="https://praia.digital/investidores-litoral">Investidores</a> · <a href="https://praia.digital/casa-vs-ape">Casa vs Apê</a> · <a href="https://praia.digital/open-house">Open House</a></footer>
+<script>
+function calc(){
+const base=8;const meses=Math.round(base*+cid.value*+tipo.value*+preco.value);
+tempo.textContent=meses+(meses===1?' mês':' meses');
+const tort=Math.min(5,Math.max(1,Math.round(meses/12)));
+vel.textContent='🐢'.repeat(tort)+'🐇'.repeat(5-tort);
+dica.innerHTML=meses<=6?'🔥 Alta liquidez! Bom para quem pode precisar do dinheiro.':meses<=12?'⏳ Liquidez moderada — preço certo e boas fotos (<a href="https://praia.digital/foto-score">Foto Score</a>) aceleram.':'🧊 Liquidez baixa. Alternativa: rentabilizar com temporada enquanto vende — veja a <a href="https://praia.digital/calculadora-temporada">Calc. Temporada</a>.';}
+calc();
+</script></body></html>
